@@ -90,7 +90,7 @@ Here are the setup and install instructions for each of the recommended IDEs for
 
 ![alt text][image36]
 
-I implemented the control system in `controller.py`. All python control system files are in the directory `./python`.
+I implemented the control system in `controller.py`. All python control system files are in the directory [`./python`](./python).
 
 The controller is separated into five parts:
 
@@ -122,7 +122,7 @@ Then I translated the desired accelerations to moment with moment of inertia:
 
 I further limited the moment with a maximum Euclidean norm of 1.0 N·m.
 
-I did this in the function `body_rate_control()` in lines 170 to 184 of `controller.py`.
+I did this in the function `body_rate_control()` in lines [173 to 189](https://github.com/clarisli/FCND-Controls/blob/36bfcdb49d1ddd5c4c2ba341fcb44cdfcbb9b989/python/controller.py#L173-L189) of `controller.py`.
 
 ### 2. Roll-pitch controller
 
@@ -160,7 +160,7 @@ Then I converted the desired change in rotation matrix into the angular velociti
 
 I also omitted downward thrust command by setting the roll and pitch command to 0 - because a real drone only has upward thrusts.
 
-I did this in the function `roll_pitch_controller()` in lines 135 to 168 of `controller.py`.
+I did this in the function `roll_pitch_controller()` in lines [138 to 169](./python/controller.py#L138-L169) of `controller.py`.
 
 
 ### 3. Yaw controller
@@ -171,7 +171,7 @@ A P controller is used to control the drone's yaw.
 
 To avoid making uncessary turns, I optimized the controller by wraping the yaw command to [0, 2π], and the yaw error to [-π, π].
 
-I did this in the function `yaw_control()` in lines 188 to 210 of `controller.py`. 
+I did this in the function `yaw_control()` in lines [191 to 213](./python/controller.py#L191-L213) of `controller.py`. 
 
 ### 4. Altitude controller
 
@@ -205,7 +205,7 @@ A PD controller is used for the altitude which results in:
 
 ![alt text][image13]
 
-I did this in the function `altitude_control()` in lines 110 to 132 of `controller.py`.
+I did this in the function `altitude_control()` in lines [112 to 134](./python/controller.py#L112-L134) of `controller.py`.
 
 ### 5. Lateral controller
 
@@ -216,7 +216,7 @@ A PD controller is used to command target values for lateral accelerations. The 
 
 The control equations have the same form for y direction as above.
 
-I did this in the function `lateral_control()` in lines 89 to 108 of `controller.py`.
+I did this in the function `lateral_control()` in lines [91 to 110](./python/controller.py#L91-L110) of `controller.py`.
 
 ### Test the controller
 
@@ -252,10 +252,10 @@ Mission Success:  True
 ![alt text][image31]
 
 ## C++ Control System
-I rebuilt the python controller into C++. All C++ files are in the directory `./cpp`. 
+I rebuilt the python controller into C++. All C++ files are in the directory [`./cpp`](./cpp). 
 
-* `config/QuadControlParams.txt`: the config file for the controller. While the simulator is running, you can edit this file in real time and see the affects of your changes have on the drone.
-* `src/QuadControl.cpp`: the implementation of the controller. 
+* [`config/QuadControlParams.txt`](./cpp/config/QuadControlParams.txt): the config file for the controller. While the simulator is running, you can edit this file in real time and see the affects of your changes have on the drone.
+* [`src/QuadControl.cpp`](./cpp/src/QuadControl.cpp): the implementation of the controller. 
 
 ### 1. Body rate controller
 
@@ -287,19 +287,19 @@ Yaw is produced by the mismatch between moments from propellers along z-axis by 
 
 ![alt text][image27]
 
-I did this in the function `GenerateMotorCommands()` in lines 56 to 85 in `QuadControl.cpp`.
+I did this in the function `GenerateMotorCommands()` in lines [56 to 85](./cpp/src/QuadControl.cpp#L56-L85) in `QuadControl.cpp`.
 
 #### Implement the body rate controller
 
-I simply converted the body rate controller from python to C++ here, in the function `BodyRateControl()` in lines 87 to 105 of `QuadControl.cpp `.
+I simply converted the body rate controller from python to C++ here, in the function `BodyRateControl()` in lines [87 to 105](./cpp/src/QuadControl.cpp#L87-L105) of `QuadControl.cpp `.
 
 ### 2. Roll-pitch controller
 
-I simply converted the roll-pitch controller from python to C++ here, in the function `RollPitchControl()` in lines 108 to 139 of `QuadControl.cpp `.
+I simply converted the roll-pitch controller from python to C++ here, in the function `RollPitchControl()` in lines [108 to 139]((./cpp/src/QuadControl.cpp#L108-L139) of `QuadControl.cpp `.
 
 ### 3. Lateral controller
 
-I converted the lateral controller from python to C++, in the function `RollPitchControl()` in lines 108 to 139 of `QuadControl.cpp `.
+I converted the lateral controller from python to C++, in the function `LateralPositionControl()` in lines [178 to 213](./cpp/src/QuadControl.cpp#L178-L213) of `QuadControl.cpp `.
 
 I further limited the velocity and acceleration commands under their maximum values, and made sure to return the desired horizontal accelerations by setting the Z component to 0.
 
@@ -311,11 +311,11 @@ The controller accumulates error over time, and then adjust the system to counte
 
 ![alt text][image23]
 
-I did this in the function `AltitudeControl()` in lines 56 to 85 in `QuadControl.cpp`.
+I did this in the function `AltitudeControl()` in lines [144 to 175](./cpp/src/QuadControl.cpp#L144-L175) in `QuadControl.cpp`.
 
 ### 5. Yaw controller
 
-I simply converted the yaw controller from python to C++ here, in the function `YawControl()` in lines 218 to 244 of `QuadControl.cpp `.
+I simply converted the yaw controller from python to C++ here, in the function `YawControl()` in lines [216 to 244](./cpp/src/QuadControl.cpp#L216-L244) of `QuadControl.cpp `.
 
 ### Test the controller
 
