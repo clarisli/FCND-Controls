@@ -295,7 +295,7 @@ I simply converted the body rate controller from python to C++ here, in the func
 
 ### 2. Roll-pitch controller
 
-I simply converted the roll-pitch controller from python to C++ here, in the function `RollPitchControl()` in lines [108 to 139]((./cpp/src/QuadControl.cpp#L108-L139) of `QuadControl.cpp `.
+I simply converted the roll-pitch controller from python to C++ here, in the function `RollPitchControl()` in lines [108 to 139](./cpp/src/QuadControl.cpp#L108-L139) of `QuadControl.cpp `.
 
 ### 3. Lateral controller
 
